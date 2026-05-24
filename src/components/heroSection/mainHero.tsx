@@ -1,8 +1,27 @@
 "use client"
 import Image from 'next/image'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+
+const mainHeroImg = [
+    "/burger1.png",
+    "/bacon.webp",
+    "/cake.webp",
+    "/chicken-curry.webp",
+    "/chicken-meat-mix-biryani.webp",
+    "/chicken-potato.webp",
+    "/fish-fry.webp",
+    "/goat-meat.webp",
+    "/ice-cream.webp",
+    "/pizza.webp",
+    "/steak-meat.webp"
+]
 
 export default function MainHero() {
+
+    // random img select
+    const [heroImg] = useState(()=>{
+      return mainHeroImg[Math.floor((Math.random() * mainHeroImg.length))]  
+    })
 
     const greenPanelRef = useRef<HTMLDivElement | null>(null);
     const glowRef = useRef<HTMLDivElement | null>(null);
@@ -95,11 +114,11 @@ export default function MainHero() {
                         <div className='animate-floating'>
                             {/* your image goes here */}
                             <Image
-                                src="/burger1.png"
-                                alt="Burger"
+                                src={heroImg}
+                                alt="Food"
                                 width={340}
                                 height={340}
-                                className="w-40 md:w-50 lg:w-80 transition-all duration-600 group-hover:rotate-2 group-hover:scale-105"
+                                className="w-46 md:w-50 lg:w-80 transition-all duration-600 group-hover:rotate-2 group-hover:scale-105"
                                 priority
                             />
                         </div>

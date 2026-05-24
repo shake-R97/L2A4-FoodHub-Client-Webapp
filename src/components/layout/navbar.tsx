@@ -53,7 +53,7 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
 
               {navigationData.map(navItem => (
                 <NavigationMenuItem key={navItem.title}>
-                  <NavigationMenuLink>
+                  <NavigationMenuLink asChild>
                     <Link className='text-[17px] font-semibold text-[#024A02]' href={navItem.href}> {navItem.title}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -61,7 +61,7 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
 
               {/* singing and toggle button */}
               <Button variant={"ghost"} asChild className=' text-base! bg-[#024A02] text-[#c6e655] rounded-full px-6 py-4'>
-                <Link href='/signup'>SignUp</Link>
+                <Link href='/register'>SignUp</Link>
               </Button>
               <Button variant={"ghost"} asChild className=' text-base! bg-[#024A02] text-[#c6e655] rounded-full  px-6 py-4'>
                 <Link href='/login'>LogIn</Link>
@@ -98,7 +98,7 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
               ))}
 
               <Button variant={"ghost"} asChild className=' text-base! text-[#024A02] '>
-                <Link href='/signup'>SignUp</Link>
+                <Link href='/register'>SignUp</Link>
               </Button>
               <Button variant={"ghost"} asChild className=' text-base! text-[#024A02]'>
                 <Link href='/login'>LogIn</Link>

@@ -1,6 +1,7 @@
 "use client"
 import Image from 'next/image'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { Button } from '../ui/button'
 
 const mainHeroImg = [
     "/burger1.png",
@@ -19,10 +20,21 @@ const mainHeroImg = [
 export default function MainHero() {
 
     // random img select
-    const [heroImg] = useState(()=>{
-      return mainHeroImg[Math.floor((Math.random() * mainHeroImg.length))]  
-    })
+    const [mounted, setMounted] = useState(false);
+    const [imgIndex] = useState(()=> Math.floor((Math.random() * mainHeroImg.length)))
 
+    useEffect(()=>{
+        const timeout = setTimeout(() => {
+            setMounted(true)
+        }, 0)
+
+        return () => clearTimeout(timeout)
+    },[])
+
+    const heroImg = mounted ? mainHeroImg[imgIndex] : mainHeroImg[0];
+        
+
+        // spotlight Effect on mousePointer
     const greenPanelRef = useRef<HTMLDivElement | null>(null);
     const glowRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,34 +65,60 @@ export default function MainHero() {
             onMouseMove={handleMouseMove}
             className="group relative flex flex-col lg:flex-row min-h-screen overflow-hidden">
             {/* left panel  */}
-            <div className="hero-left-panel flex flex-1 flex-col  justify-center px-8 py-13 md:py-0 lg:px-19 lg:py-12 z-10 transition-all duration-500 ease-out  group-hover:-translate-y-2 group-hover:scale-[1.01]">
+            <div className="hero-left-panel hero-left flex flex-1 flex-col  justify-center px-8 py-13 md:py-0 lg:px-19 lg:py-12 z-10 transition-all duration-500 ease-out  group-hover:-translate-y-2 group-hover:scale-[1.01]">
+
+                {/* live badge */}
+                <div className='inline-flex items-center gap-1.5 bg-transparent dark:bg-[rgba(47,125,79,0.15)] border-[0.5px] border-solid border-[rgba(76,175,120,0.3)] rounded-[20px] px-3 py-3 mb-4.5 w-fit'>
+                    <div className='w-1.5 h-1.5 rounded-[50%] dot-pulse'/>
+                    <div>
+                        <p className='text-xs text-[#4caf78]'>Now Delivering Near You</p>
+                    </div>
+                </div>
                 <h1 
                 style={{fontSize: 'clamp(1.9rem, 3.8vw, 3.5rem)'}}
-                className="font-bold text-[#024A02] mb-3">GoEat On FoodHub</h1>
+                className="font-bold text-[#4caf78] dark:text-white mb-3">GoEat On <span className='text-[#4caf78] dark:text-[#4caf78]'>FoodHub</span></h1>
                 <h1
                 style={{fontSize: 'clamp(1.3rem, 2vw, 1.875rem)'}}
-                 className="text-[#024602] font-semibold">
-                    Let&apos;s Take Care Your Hunger!
+                 className="text-[#4caf78] dark:text-white font-semibold">
+                    Let&apos;s Take Care Of Your Hunger!
                 </h1>
 
                 <p 
                 style={{fontSize: 'clamp(.960rem, 2vw, 1.275rem)'}}
-                className="text-pretty text-[#024A02] mt-3">To order food, sign up as User,<br/> And for Provider, sign up as a Provider.</p>
+                className="text-pretty text-foreground mt-3">To order food, sign up as User,<br/> And for Provider, sign up as a Provider.</p>
                 
                 <div>
 
-                    <p className="text-[#024A02] text-[15px]  mt-3 mb-3">Search for Restaurants and stores delivering near you!</p>
+                    <p className="text-foreground text-[16px]  mt-3 mb-3">Search for Restaurants and stores delivering near you!</p>
                     
                     <div className="search-row flex flex-col sm:flex-row  gap-3 max-w-sm sm:max-w-md">
 
                     <input
                         type="text"
                         placeholder="Enter your address ('Gulshan')etc"
-                        className="flex-1 rounded-full px-5 py-3 bg-[#024602] border border-[#c6e655] text-[#c6e655]"
+                        className="flex-1 rounded-full px-5 py-3 bg-white border border-[#4caf78] text-[#4caf78] dark:bg-[rgba(255,255,255,0.05)] dark:text-[#8fa897] focus:border-[#3aad65] dark:border-[#3aad65] dark:focus:border-[#3aad65]"
                     />
-                    <button className="bg-[#024602] text-[#c6e655] font-semibold rounded-full px-7 py-3 whitespace-nowrap">
+                    <Button variant={"ghost"} className="bg-[#3aad65] text-white dark:text-white font-semibold rounded-full text-[16px] px-6 py-6 hover:bg-[#2d9958] whitespace-nowrap">
                         Search
-                    </button>
+                    </Button>
+                </div>
+
+
+                 {/* intro stats */}
+                <div className='inline-flex justify-center items-center text-center gap-7 mt-7 '>
+                    <div>
+                        <div className='font-bold text-xl text-[#3aad65] dark:text-white  '>500+</div>
+                        <div className='text-sm text-[#8fa897] mt-0.5'>Restaurant</div>
+                    </div>
+                    <div>
+                        <div className='font-bold text-xl text-[#3aad65] dark:text-white  '>30 min</div>
+                        <div className='text-sm text-[#8fa897] mt-0.5'>Avg delivery</div>
+                    </div>
+                    <div>
+                        <div className='font-bold text-xl text-[#3aad65] dark:text-white  '>4.8</div>
+                        <div className='text-sm text-[#8fa897] mt-0.5'>Avg Ratings</div>
+                    </div>
+                    
                 </div>
                 </div>
             </div>
@@ -89,7 +127,7 @@ export default function MainHero() {
             <div
                 ref={greenPanelRef}
                 onMouseLeave={handleMouseLeave}
-                className="diagonal-clip relative overflow-hidden w-full h-150 md:h-145 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:h-auto lg:w-[52%] bg-[#024602] flex items-center justify-center   transition-all duration-700 ease-out  group-hover:-translate-y-3 group-hover:scale-[1.02] group-hover:shadow-[0_0_80px_rgba(34,197,94,0.35)] will-change-transform"
+                className="diagonal-clip relative overflow-hidden w-full h-150 md:h-145 lg:absolute lg:right-0 lg:top-0 lg:bottom-0 lg:h-auto lg:w-[52%] bg-[#1b4d2e] flex items-center justify-center   transition-all duration-700 ease-out  group-hover:-translate-y-3 group-hover:scale-[1.02] group-hover:shadow-[0_0_80px_rgba(34,197,94,0.35)] will-change-transform"
             >
                 {/* glow light on cursor div */}
                 <div
@@ -103,7 +141,7 @@ export default function MainHero() {
 
                 {/* content */}
                 <div className="relative z-20 text-center lg:pl-16 pt-16 lg:pt-0">
-                    <p className="text-white text-shadow-lg/100 text-3xl  lg:text-5xl font-black uppercase leading-tight">
+                    <p className="text-white dark:text-[#ffffff] text-shadow-lg/100 text-3xl  lg:text-5xl font-black uppercase leading-tight">
                         STOP EATING LEFTOVERS
                     </p>
 
@@ -124,7 +162,7 @@ export default function MainHero() {
                         </div>
                     </div>
 
-                    <p className="text-white text-3xl lg:text-5xl font-black uppercase leading-tight">EAT FRESH ANYWHERE ANYTIME!</p>
+                    <p className="text-[rgba(255,255,255,0.9)] text-3xl lg:text-5xl font-black uppercase leading-tight">EAT FRESH ANYWHERE ANYTIME!</p>
                 </div>
             </div>
         </div>

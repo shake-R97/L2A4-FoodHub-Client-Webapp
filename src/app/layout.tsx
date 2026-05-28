@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Sora } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 
 const geistSans = Geist({
@@ -30,10 +31,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn("h-full", "antialiased", geistSans.variable, sora.variable)}
     >
       <body className={`${sora.className} min-h-full flex flex-col`}>
-        {children}
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
         </body>
     </html>
   );

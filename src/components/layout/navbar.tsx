@@ -29,7 +29,7 @@ type HeaderProps = {
 
 const Navbar = ({ navigationData, className }: HeaderProps) => {
   return (
-    <header className={cn('bg-white sticky top-0 z-50 h-17.5', className)}>
+    <header className={cn('bg-background backdrop-blur-md sticky top-0 z-50 h-17.5', className)}>
       <div className='mx-auto flex h-full w-9/10  items-center justify-between gap-6 px-4 py-3 sm:px-4 lg:px-8'>
 
         {/* Logo */}
@@ -54,16 +54,16 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
               {navigationData.map(navItem => (
                 <NavigationMenuItem key={navItem.title}>
                   <NavigationMenuLink asChild>
-                    <Link className='text-[17px] font-semibold text-[#024A02]' href={navItem.href}> {navItem.title}</Link>
+                    <Link className='text-[17px] font-semibold text-foreground' href={navItem.href}> {navItem.title}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
 
               {/* singing and toggle button */}
-              <Button variant={"ghost"} asChild className=' text-base! bg-[#024A02] text-[#c6e655] rounded-full px-6 py-4'>
+              <Button variant={"outline"} asChild className=' text-base! bg-[#4caf78] text-white dark:bg-transparent dark:border-[#3aad65] btn-black rounded-full px-6 py-4'>
                 <Link href='/register'>SignUp</Link>
               </Button>
-              <Button variant={"ghost"} asChild className=' text-base! bg-[#024A02] text-[#c6e655] rounded-full  px-6 py-4'>
+              <Button variant={"ghost"} asChild className=' text-base! bg-[#3aad65] dark:bg-[#3aad65] text-white rounded-full  px-6 py-4'>
                 <Link href='/login'>LogIn</Link>
               </Button>
             </NavigationMenuList>
@@ -93,14 +93,14 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
             <DropdownMenuContent className='w-40 mt-1' align='end'>
               {navigationData.map((item, index) => (
                 <DropdownMenuItem key={index}>
-                  <Link className='text-[14px] font-medium text-[#024A02]' href={item.href}>{item.title}</Link>
+                  <Link className='text-[14px] font-medium text-foreground' href={item.href}>{item.title}</Link>
                 </DropdownMenuItem>
               ))}
 
-              <Button variant={"ghost"} asChild className=' text-base! text-[#024A02] '>
+               <Button variant={"outline"} asChild className=' text-base! bg-[#4caf78] text-white dark:bg-transparent dark:border-[#3aad65] btn-black rounded-full px-6 py-4 mb-2 ml-1'>
                 <Link href='/register'>SignUp</Link>
               </Button>
-              <Button variant={"ghost"} asChild className=' text-base! text-[#024A02]'>
+              <Button variant={"ghost"} asChild className=' text-base! bg-[#3aad65] dark:bg-[#3aad65] text-white rounded-full  px-6 py-4 mb-1.5 ml-1'>
                 <Link href='/login'>LogIn</Link>
               </Button>
 
@@ -108,7 +108,8 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
           </DropdownMenu>
         </div>
       </div>
-      <div className='bg-white mx-auto h-px w-full bg-gradient-to-r from-transparent to-transparent'></div>
+      <div className='bg-[#73a07363] dark:bg-[#8c9ea3]/15 mx-auto h-[0.3px] w-full bg-gradient-to-r from-transparent  to-transparent
+  dark:'></div>
     </header >
   )
 }

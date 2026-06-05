@@ -15,7 +15,7 @@ import { ModeToggle } from '@/components/layout/modeToggle'
 
 import { cn } from '@/lib/utils'
 
-import Logo from '@/components/logo'
+import Logo from '@/components/layout/logo'
 
 export type NavigationSection = {
   title: string
@@ -61,7 +61,7 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
 
               {/* singing and toggle button */}
               <Button variant={"outline"} asChild className=' text-base! bg-[#4caf78] text-white dark:bg-transparent dark:border-[#3aad65] btn-black rounded-full px-6 py-4'>
-                <Link href='/register'>SignUp</Link>
+                <Link href='/signup'>SignUp</Link>
               </Button>
               <Button variant={"ghost"} asChild className=' text-base! bg-[#3aad65] dark:bg-[#3aad65] text-white rounded-full  px-6 py-4'>
                 <Link href='/login'>LogIn</Link>
@@ -98,7 +98,7 @@ const Navbar = ({ navigationData, className }: HeaderProps) => {
               ))}
 
                <Button variant={"outline"} asChild className=' text-base! bg-[#4caf78] text-white dark:bg-transparent dark:border-[#3aad65] btn-black rounded-full px-6 py-4 mb-2 ml-1'>
-                <Link href='/register'>SignUp</Link>
+                <Link href='/signup'>SignUp</Link>
               </Button>
               <Button variant={"ghost"} asChild className=' text-base! bg-[#3aad65] dark:bg-[#3aad65] text-white rounded-full  px-6 py-4 mb-1.5 ml-1'>
                 <Link href='/login'>LogIn</Link>

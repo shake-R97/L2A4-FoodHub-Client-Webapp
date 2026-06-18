@@ -4,16 +4,16 @@ import Link from "next/link"
 import { MapPin, ChevronRight } from "lucide-react"
 
 interface RestaurantChipProps {
-  name: string
-  city: string
-  logoUrl: string
-  url: string
+  name?: string
+  city?: string
+  logoUrl?: string
+  url?: string
 }
 
 export function RestaurantChip({ name, city, logoUrl, url }: RestaurantChipProps) {
   return (
     <Link
-      href={url}
+      href={url as string}
       className="
         group flex items-center gap-3 mt-4
         px-3 py-2.5 rounded-xl w-full
@@ -27,7 +27,7 @@ export function RestaurantChip({ name, city, logoUrl, url }: RestaurantChipProps
     >
       {/* Avatar */}
       <div className="relative shrink-0">
-        <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-[#3aad65]/30 group-hover:ring-[#3aad65]/60 transition-all duration-200">
+        <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#3aad65]/30 group-hover:ring-[#3aad65]/60 transition-all duration-200">
           {/* <Image
             src={avatarUrl}
             alt={name}

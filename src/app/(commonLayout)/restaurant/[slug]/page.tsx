@@ -1,5 +1,6 @@
-import { Restaurant } from "@/components/Types/api";
+import RestaurantProfile from "@/components/module/RestaurantProfile/restaurantProfile";
 import { RestaurantService } from "@/services/Restaurant.service";
+
 
 export default async function RestaurantSingleProfilePage(
     {params}:
@@ -17,11 +18,30 @@ export default async function RestaurantSingleProfilePage(
     
 
     const restaurant = data.data
+    const deliFee = Number(data.data.deliveryFee)
+    const restaurantMeals = restaurant.meals.map((meal)=>({
+        ...meal, 
+        price : Number(meal.price),
+        deliveryFee: deliFee
+    })) 
+    
+console.log(restaurantMeals);
 
   return (
     <div>
-        <h1 className="text-9xl">Restaurant Name :{restaurant.businessName}</h1> 
-        
+        <RestaurantProfile 
+         restaurant={{
+            businessName: restaurant.businessName,
+            coverImage: restaurant.coverImage,
+            logo: restaurant.logo,
+            address: restaurant.address,
+            rating: 4,
+            reviewCount: 100,
+            deliveryTime: "30 min",
+            cuisineType: "Italian"
+         }}
+         meal={restaurantMeals}
+        />
     </div>
   )
 }

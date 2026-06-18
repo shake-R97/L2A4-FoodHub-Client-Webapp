@@ -64,6 +64,15 @@ export interface Restaurant {
     isOpen: boolean,
     createdAt: Date,
     updatedAt: Date,
+    meals: [
+        {
+            id: number,
+            name: string,
+            price: string,
+            description: string,
+            image: string,
+        }
+    ]
 }
 
 export interface GetMenuParams {
@@ -76,4 +85,40 @@ export interface GetMenuParams {
 export interface CacheOptions {
     cache?: RequestCache,
     revalidate?: number,
+}
+
+
+// foodCard type for restaurant profile
+export interface FoodItem {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  deliveryFee: number;
+  image: string;
+  category?: string;
+  ingredients?: string[],
+  isAvailable?: string,
+  averageRating?: number,
+  ratingCount?: number,
+  calories?: number,
+}
+
+export interface CartItem extends FoodItem {
+  quantity: number;
+}
+
+export interface RestaurantProfileProps {
+  restaurant: {
+    businessName: string;
+    coverImage?: string;
+    logo?: string;
+    address?: string;
+    rating?: number;
+    reviewCount?: number;
+    deliveryTime?: string;
+    cuisineType?: string;
+  };
+  meal: FoodItem[];
+  onFoodCardClick?: (food: FoodItem) => void;
 }
